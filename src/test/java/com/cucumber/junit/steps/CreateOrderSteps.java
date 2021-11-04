@@ -1,7 +1,13 @@
 package com.cucumber.junit.steps;
 
+import static com.codeborne.selenide.Selenide.screenshot;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Rule;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+import com.codeborne.selenide.junit.ScreenShooter;
+import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.cucumber.junit.pages.*;
 
 import io.cucumber.java.en.Given;
@@ -15,6 +21,9 @@ public class CreateOrderSteps {
 	private final CartPage cartPage = new CartPage();
 	private final SignInRegister signInRegister = new SignInRegister();
 	private final CheckoutShipment checkoutShipment = new CheckoutShipment();
+
+//	@RegisterExtension
+//	public static ScreenShooterExtension screenShooterExtension = new ScreenShooterExtension().to("target/selenide");
 
 	@Given("the user opens Accelerator website")
 	public void openAcceleratorWebsite() {
@@ -70,5 +79,7 @@ public class CreateOrderSteps {
 		assertThat(checkoutShipment.getOrderTax())
 				.as("Order Tax is not as expected")
 				.isEqualToIgnoringCase(expectedTax);
+
+//		screenshot("test passed");
 	}
 }
